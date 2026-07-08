@@ -1,0 +1,154 @@
+<svg viewBox="0 0 1280 940" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8B7355"/>
+    </marker>
+    <marker id="arrowRust" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#A8481A"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="940" fill="#14120F"/>
+
+  <!-- Title -->
+  <text x="40" y="52" font-family="Georgia, serif" font-size="28" fill="#E8DFC8" font-weight="600">Palimpsest — Architecture</text>
+  <text x="40" y="76" font-family="Consolas, Menlo, monospace" font-size="12" fill="#8B7355" letter-spacing="1">TRACK 1 · MEMORYAGENT — GLOBAL AI HACKATHON SERIES WITH QWEN CLOUD</text>
+
+  <!-- ============ Dashboard (client) ============ -->
+  <rect x="40" y="120" width="260" height="90" rx="8" fill="#1C1914" stroke="#5B6570" stroke-width="1.5"/>
+  <text x="60" y="150" font-family="Arial, sans-serif" font-size="15" fill="#E8DFC8" font-weight="700">Dashboard</text>
+  <text x="60" y="170" font-family="Consolas, Menlo, monospace" font-size="11" fill="#8B7355">static/index.html</text>
+  <text x="60" y="188" font-family="Consolas, Menlo, monospace" font-size="11" fill="#8B7355">chat · ingest · memory feed</text>
+
+  <!-- Arrow: Dashboard -> FastAPI -->
+  <line x1="170" y1="210" x2="170" y2="250" stroke="#8B7355" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="185" y="235" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">HTTP / fetch</text>
+
+  <!-- ============ Alibaba Cloud boundary ============ -->
+  <rect x="40" y="252" width="820" height="640" rx="10" fill="none" stroke="#5C8374" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="60" y="278" font-family="Consolas, Menlo, monospace" font-size="12" fill="#5C8374" letter-spacing="1">ALIBABA CLOUD — ECS + APSARADB RDS, SAME VPC/REGION</text>
+
+  <!-- ============ FastAPI backend ============ -->
+  <rect x="70" y="296" width="760" height="410" rx="8" fill="#1C1914" stroke="#A8481A" stroke-width="1.5"/>
+  <text x="90" y="326" font-family="Arial, sans-serif" font-size="15" fill="#E8DFC8" font-weight="700">FastAPI Backend  (ECS, Docker)</text>
+
+  <!-- Ingest pipeline row -->
+  <text x="90" y="356" font-family="Consolas, Menlo, monospace" font-size="11" fill="#8B7355" letter-spacing="1">INGEST PIPELINE</text>
+
+  <g font-family="Arial, sans-serif" font-size="12" fill="#E8DFC8">
+    <rect x="90" y="368" width="150" height="52" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="102" y="390">Classify</text>
+    <text x="102" y="406" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">fact/pref/instr</text>
+
+    <rect x="260" y="368" width="150" height="52" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="272" y="390">Embed</text>
+    <text x="272" y="406" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">text-embedding-v3</text>
+
+    <rect x="430" y="368" width="180" height="52" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="442" y="390">Conflict check</text>
+    <text x="442" y="406" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">pgvector search</text>
+
+    <rect x="630" y="368" width="170" height="52" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="642" y="390">Adjudicate</text>
+    <text x="642" y="406" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">supersede/exception</text>
+  </g>
+
+  <line x1="240" y1="394" x2="258" y2="394" stroke="#5B6570" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="410" y1="394" x2="428" y2="394" stroke="#5B6570" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="610" y1="394" x2="628" y2="394" stroke="#5B6570" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Write to DB -->
+  <line x1="715" y1="420" x2="715" y2="460" stroke="#5B6570" stroke-width="1.5"/>
+  <line x1="715" y1="460" x2="715" y2="460" stroke="#5B6570"/>
+
+  <!-- Retrieval pipeline row -->
+  <text x="90" y="452" font-family="Consolas, Menlo, monospace" font-size="11" fill="#8B7355" letter-spacing="1">RETRIEVAL + SCORING PIPELINE</text>
+
+  <g font-family="Arial, sans-serif" font-size="12" fill="#E8DFC8">
+    <rect x="90" y="464" width="150" height="52" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="102" y="486">Embed query</text>
+
+    <rect x="260" y="464" width="150" height="52" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="272" y="486">Vector search</text>
+    <text x="272" y="502" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">pgvector, HNSW</text>
+
+    <rect x="430" y="464" width="180" height="52" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="442" y="486">Decay score</text>
+    <text x="442" y="502" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">recency×freq×relevance</text>
+
+    <rect x="630" y="464" width="170" height="52" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="642" y="486">Top-k retrieve</text>
+    <text x="642" y="502" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">context budget</text>
+  </g>
+
+  <line x1="240" y1="490" x2="258" y2="490" stroke="#5B6570" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="410" y1="490" x2="428" y2="490" stroke="#5B6570" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="610" y1="490" x2="628" y2="490" stroke="#5B6570" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Compression + response row -->
+  <text x="90" y="548" font-family="Consolas, Menlo, monospace" font-size="11" fill="#8B7355" letter-spacing="1">MAINTENANCE + RESPONSE</text>
+
+  <g font-family="Arial, sans-serif" font-size="12" fill="#E8DFC8">
+    <rect x="90" y="560" width="200" height="52" rx="6" fill="#14120F" stroke="#5C8374"/>
+    <text x="102" y="582">Compress stale</text>
+    <text x="102" y="598" font-family="Consolas, Menlo, monospace" font-size="10" fill="#5C8374">low-score clusters → 1 node</text>
+
+    <rect x="320" y="560" width="200" height="52" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="332" y="582">Generate response</text>
+    <text x="332" y="598" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">final answer to user</text>
+  </g>
+
+  <!-- Endpoints strip -->
+  <rect x="90" y="632" width="710" height="70" rx="6" fill="#14120F" stroke="#2C2820"/>
+  <text x="106" y="654" font-family="Consolas, Menlo, monospace" font-size="11" fill="#8B7355" letter-spacing="1">API ENDPOINTS</text>
+  <text x="106" y="676" font-family="Consolas, Menlo, monospace" font-size="12" fill="#E8DFC8">POST /ingest · POST /chat · GET /memories · POST /memories/rescore · POST /memories/compress</text>
+
+  <!-- ============ Database ============ -->
+  <rect x="90" y="740" width="710" height="86" rx="8" fill="#1C1914" stroke="#5B6570" stroke-width="1.5"/>
+  <text x="110" y="770" font-family="Arial, sans-serif" font-size="15" fill="#E8DFC8" font-weight="700">ApsaraDB RDS for PostgreSQL</text>
+  <text x="110" y="790" font-family="Consolas, Menlo, monospace" font-size="11" fill="#8B7355">pgvector extension · HNSW index · memories table (status, decay_score, reasoning_trace, embedding)</text>
+
+  <!-- Arrows: backend <-> db -->
+  <line x1="450" y1="740" x2="450" y2="708" stroke="#5B6570" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="466" y="728" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">read / write SQL</text>
+
+  <!-- ============ Qwen Cloud (external) ============ -->
+  <rect x="930" y="296" width="310" height="430" rx="8" fill="#1C1914" stroke="#A8481A" stroke-width="1.5"/>
+  <text x="950" y="326" font-family="Arial, sans-serif" font-size="15" fill="#E8DFC8" font-weight="700">Qwen Cloud API</text>
+  <text x="950" y="344" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">OpenAI-compatible SDK</text>
+
+  <g font-family="Arial, sans-serif" font-size="12" fill="#E8DFC8">
+    <rect x="950" y="362" width="270" height="46" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="962" y="382">qwen3.6-flash</text>
+    <text x="962" y="398" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">classification (cheap/fast)</text>
+
+    <rect x="950" y="420" width="270" height="46" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="962" y="440">text-embedding-v3</text>
+    <text x="962" y="456" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">memory + query vectors</text>
+
+    <rect x="950" y="478" width="270" height="46" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="962" y="498">qwen3.7-max</text>
+    <text x="962" y="514" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">conflict adjudication (thinking)</text>
+
+    <rect x="950" y="536" width="270" height="46" rx="6" fill="#14120F" stroke="#2C2820"/>
+    <text x="962" y="556">qwen3.7-plus</text>
+    <text x="962" y="572" font-family="Consolas, Menlo, monospace" font-size="10" fill="#8B7355">compression + final response</text>
+  </g>
+
+  <text x="950" y="612" font-family="Consolas, Menlo, monospace" font-size="10" fill="#5C8374">$40 hackathon voucher · free-tier quota</text>
+
+  <!-- Arrows: backend <-> qwen -->
+  <line x1="830" y1="394" x2="928" y2="384" stroke="#A8481A" stroke-width="1.5" marker-end="url(#arrowRust)"/>
+  <line x1="830" y1="490" x2="928" y2="443" stroke="#A8481A" stroke-width="1.5" marker-end="url(#arrowRust)"/>
+  <line x1="830" y1="394" x2="928" y2="500" stroke="#A8481A" stroke-width="1.5" marker-end="url(#arrowRust)"/>
+  <line x1="830" y1="586" x2="928" y2="558" stroke="#A8481A" stroke-width="1.5" marker-end="url(#arrowRust)"/>
+
+  <!-- ============ Legend ============ -->
+  <g font-family="Consolas, Menlo, monospace" font-size="11" fill="#8B7355">
+    <rect x="40" y="900" width="14" height="14" fill="none" stroke="#A8481A"/>
+    <text x="60" y="911">Qwen Cloud call</text>
+
+    <rect x="200" y="900" width="14" height="14" fill="none" stroke="#5C8374"/>
+    <text x="220" y="911">Compression (forgetting via summarization, not deletion)</text>
+  </g>
+</svg>
