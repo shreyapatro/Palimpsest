@@ -24,7 +24,13 @@ Definitions:
 
 
 def find_conflict_candidates(conn, embedding, memory_type: str, exclude_id=None):
-    """Vector-search existing active memories of the same type above the similarity threshold."""
+    """
+    Vector-search existing active memories of the same type above the similarity
+    threshold, capped at conflict_max_candidates. Each candidate triggers a full
+    qwen3.7-max adjudication call (the most expensive model in the pipeline, run
+    with thinking mode on) — capping this controls cost without losing the
+    multi-candidate conflict resolution behavior itself.
+    """
     rows = conn.execute(
         """
         SELECT id, content, 1 - (embedding <=> %s) AS similarity
@@ -32,9 +38,9 @@ def find_conflict_candidates(conn, embedding, memory_type: str, exclude_id=None)
         WHERE status = 'active' AND memory_type = %s
           AND (%s::bigint IS NULL OR id != %s)
         ORDER BY embedding <=> %s
-        LIMIT 5
+        LIMIT %s
         """,
-        (embedding, memory_type, exclude_id, exclude_id, embedding),
+        (embedding, memory_type, exclude_id, exclude_id, embedding, settings.conflict_max_candidates),
     ).fetchall()
     return [r for r in rows if r[2] >= settings.conflict_similarity_threshold]
 

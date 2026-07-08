@@ -16,6 +16,7 @@ class Settings(BaseSettings):
 
     context_budget_top_k: int = 8
     conflict_similarity_threshold: float = 0.80
+    conflict_max_candidates: int = 3
     compression_score_threshold: float = 0.25
     compression_min_cluster_size: int = 3
     cluster_similarity_threshold: float = 0.72
