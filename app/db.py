@@ -7,7 +7,13 @@ pool = ConnectionPool(
     conninfo=settings.database_url,
     min_size=1,
     max_size=10,
-    kwargs={"autocommit": True},
+    # prepare_threshold=None disables server-side prepared statements. Required
+    # when connecting through a transaction-mode connection pooler (e.g. Supabase's
+    # pooler on port 6543, or any pgbouncer in transaction mode) — those poolers can
+    # route each query to a different underlying Postgres backend, so a prepared
+    # statement cached against one backend connection may not exist on the next one,
+    # causing "prepared statement already exists" / "does not exist" errors.
+    kwargs={"autocommit": True, "prepare_threshold": None},
 )
 
 
