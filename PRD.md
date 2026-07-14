@@ -1,10 +1,8 @@
 # Palimpsest — Product Requirements Document
 
-**Track:** Track 1 — MemoryAgent
-**Hackathon:** Global AI Hackathon Series with Qwen Cloud
-**Deadline:** July 10, 2026, 2:30 AM GMT+5:30
-**Builder:** Solo (Shreya)
-**Status:** Draft v1 — scoped for a 3-day solo build
+**Origin:** Originally scoped around Track 1 (MemoryAgent) of a Qwen Cloud hackathon; continued and completed independently as a personal portfolio project, not submitted to the hackathon.
+**Builder:** Shreya
+**Status:** Feature-complete for personal use; no submission deadline in play
 
 ---
 
@@ -145,14 +143,16 @@ CREATE INDEX ON memories USING hnsw (embedding vector_cosine_ops);
 
 ---
 
-## 9. Timeline (3-day solo sprint)
+## 9. History (as actually built)
 
-- **Day 1 (Jul 7):** Alibaba Cloud account + ECS + RDS provisioning, Qwen API key + coupon claimed, DB schema live, FastAPI skeleton, ingestion/classification/embedding pipeline working locally.
-- **Day 2 (Jul 8):** Conflict detection, decay scoring, compression job, retrieval, chat endpoint wired end-to-end; basic dashboard UI.
-- **Day 3 (Jul 9):** Deploy to ECS, verify end-to-end on cloud, write README + architecture diagram, record proof-of-deployment clip + 3-minute demo video, final polish. Submit with buffer before the Jul 10, 2:30 AM IST cutoff.
+- **Day 1-2:** FastAPI skeleton, DB schema, Qwen client, ingestion/classification/embedding pipeline built and debugged locally against Docker (working through several real integration issues along the way: an `httpx`/`openai` version mismatch, a pgvector extension-ordering bug, a `Vector` type dumper bug).
+- **Day 3:** Conflict detection, decay scoring, compression, retrieval, chat endpoint wired end-to-end; dashboard UI built and confirmed against real Qwen Cloud calls.
+- **Later:** Hardened based on a full architecture walkthrough — fixed a real trust-boundary gap (untrusted memories were being retrieved despite being tagged), added multi-candidate conflict resolution, similarity-based compression clustering, a background maintenance loop, retry/backoff on Qwen calls, and an honest `/health` check.
+- **Deployment:** Alibaba Cloud account verification became a persistent blocker (India unavailable at signup, phone verification locked to a Singapore number with no workaround available). Rather than continue fighting account infrastructure unrelated to the actual project, deployment target shifted to Supabase (Postgres + pgvector) + Render (Docker hosting) — both free, no phone verification required.
+- **Submission:** Not submitted to the original hackathon (deployment blocker made the timeline impractical); continued and finished as an independent portfolio project instead.
 
-## 10. Risks
+## 10. Risks (historical, kept for record)
 
-- **Time is the binding constraint**, not technical difficulty — every "should have" gets cut first if Day 2 runs long.
-- **Cloud provisioning delays** (account verification, RDS instance spin-up) eat into Day 1 if not started immediately.
-- **Qwen coupon activation lag** — start building against free-tier quota immediately rather than waiting on the $40 coupon to land.
+- **Time was the binding constraint** early on, before the hackathon deadline was extended and later dropped as a goal entirely.
+- **Cloud account verification** turned out to be the actual blocker, not technical difficulty — a good reminder that infrastructure/account setup risk deserves the same early attention as the technical build.
+
