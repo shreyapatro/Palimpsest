@@ -6,6 +6,8 @@ A personal project exploring what a genuinely self-maintaining memory system loo
 
 > A palimpsest is a manuscript that's been written on, scraped clean, and written on again — the old text still faintly visible beneath the new. That's the idea here: memory that gets actively revised, compressed, and reasoned about, not just piled up.
 
+**Live demo:** [palimpsest-9euo.onrender.com](https://palimpsest-9euo.onrender.com) — dashboard at `/`, interactive API docs at `/docs`. Hosted on Render's free tier, so the first request after a period of inactivity may take 30-60 seconds to wake up.
+
 ---
 
 ## Why this exists
